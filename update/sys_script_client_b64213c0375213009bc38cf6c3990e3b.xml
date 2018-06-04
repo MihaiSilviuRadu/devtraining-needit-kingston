@@ -4,52 +4,52 @@
         <active>true</active>
         <applies_extended>false</applies_extended>
         <condition/>
-        <description>Use the GetCIClass Script Include to retrieve the class of the CI from the database when the Configuration Item value changes. </description>
-        <field>cmdb_ci</field>
+        <description>Counts how many CIs exists in that class</description>
+        <field>u_class</field>
         <global>true</global>
         <messages/>
-        <name>Populate Class Field</name>
+        <name>Count CI in the same class</name>
         <order/>
         <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
    if (isLoading || newValue === '') {
       return;
    }
 
-   // Instantiate the GetCIClass Script Include 
-	var getCICl = new GlideAjax('GetCIClass');
-	// Specify the getCI method
-	getCICl.addParam('sysparm_name','getClass');
+    // Instantiate the CountCIsInClass Script Include 
+	var countCI = new GlideAjax('CountCIsInClass');
+	// Specify the countCI method
+	countCI.addParam('sysparm_name','countCIs');
 	// Pass the Requested for cmdb_ci
-	getCICl.addParam('sysparm_CI', g_form.getValue('cmdb_ci'));
+	countCI.addParam('sysparm_class', newValue);
 	// Send the request to the server
-	getCICl.getXML(populateClassField);
+	countCI.getXMLAnswer(function(answer){
+		alert('Total ' + answer + ' CIs of the same class exist in the system');
+	});
 
 
 	// When the response is back from the server
-	function populateClassField(response){
-		// Extract the class from the response, clear any value from the class field, 
-		// set new value in the class field
-		var classFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
-		g_form.clearValue('u_class');
-		g_form.setValue('u_class',classFromScriptInclude);
-	}
+	//function CountCIInClass(response){
+		// Extract the number of CI's from the response, and display it 
+	//	var countCIFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
+	//	alert(g_form.addInfoMessage('Total' + countCIFromScriptInclude + 'CIs of thesame class exist in the system'));
+//	}
    
 }]]></script>
         <sys_class_name>sys_script_client</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-05-18 14:27:50</sys_created_on>
+        <sys_created_on>2018-05-21 10:13:29</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>6cba209f378213009bc38cf6c3990eb9</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>Populate Class Field</sys_name>
+        <sys_id>b64213c0375213009bc38cf6c3990e3b</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Count CI in the same class</sys_name>
         <sys_overrides/>
         <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
         <sys_policy/>
         <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
-        <sys_update_name>sys_script_client_6cba209f378213009bc38cf6c3990eb9</sys_update_name>
+        <sys_update_name>sys_script_client_b64213c0375213009bc38cf6c3990e3b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-21 10:13:02</sys_updated_on>
+        <sys_updated_on>2018-05-21 14:36:07</sys_updated_on>
         <table>x_58872_needit_needit</table>
         <type>onChange</type>
         <ui_type>0</ui_type>

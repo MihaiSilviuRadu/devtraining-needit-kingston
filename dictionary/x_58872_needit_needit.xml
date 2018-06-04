@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element audit="true" extends="task" label="NeedIt" max_length="40" name="x_58872_needit_needit" sizeclass="69" type="collection">
+    <element audit="true" extends="task" label="NeedIt" max_length="40" name="x_58872_needit_needit" sizeclass="72" type="collection">
         <element label="New field 1" max_length="40" name="new_field_1" type="string"/>
         <element choice="1" label="Resolution Group 1" max_length="32" name="resolution_group_1" reference="sys_user_group" type="reference">
             <choice/>
